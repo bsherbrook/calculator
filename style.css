@@ -44,3 +44,7 @@ button{
 .big{
     width: 100px;
 }
+button:hover{
+    cursor:pointer;
+    background-color: aqua;
+}
