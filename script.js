@@ -21,23 +21,27 @@ const bDecimal= document.getElementById('.');
 let calcArray=[];
 let numBox= '';
 let opBox='';
+screenCheck=0;  //error when numbers right after sum calculation
 const allButtons= document.getElementById('allButtons');
 const test= function(element){
     if(element.target.className==='decimal' ||
        element.target.className==='number' ||
        element.target.className==='operator'){
         let userInput= element.target.id;
-        if (screen.innerHTML===answer.toString()){screen.innerHTML='';}//dont concat on numbers onto screen answer
-        screen.innerHTML+= userInput;  //show numbers on screen
     if (element.target.className==='number'){
         numBox+= userInput;
+        if (screen.innerHTML===answer.toString() ||
+            screenCheck===1){screen.innerHTML='';}//dont concat on numbers onto screen answer
+        screen.innerHTML+= userInput;  //show numbers on screen
+        screenCheck=0;
     }
     if (element.target.className==='operator'){    
-        if (numBox !== ''){
+        if (numBox !== ''){//dont push empty values into array
         calcArray.push(Number(numBox));//put number in array
         console.log(calcArray);
         numBox='';
-        }if (opBox!== ''){
+        screenCheck=1;
+        }if (opBox!== '' && calcArray[1]){
             operate();
             };
         opBox= userInput;
@@ -63,10 +67,11 @@ clearField= function(){
     numBox='';
     opBox='';
     answer=0;
-    screen.innerHTML='';
+    screen.innerHTML='0';
 }
 let tempArray;
 deleteNum= function(){
+    if (answer){return}; //doesnt allow for delete after calculating sum...
     tempArray=[];
     tempArray= numBox.split('');
     tempArray.pop();
