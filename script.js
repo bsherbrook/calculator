@@ -19,38 +19,60 @@ const bSubtract= document.getElementById('-');
 const bEquals= document.getElementById('=');
 const bDecimal= document.getElementById('.');
 let calcArray=[];
-let a= '';
-let b='';
+let numBox= '';
+let opBox='';
 const allButtons= document.getElementById('allButtons');
 const test= function(element){
     if(element.target.className==='decimal' ||
        element.target.className==='number' ||
        element.target.className==='operator'){
         let userInput= element.target.id;
+        if (screen.innerHTML===answer.toString()){screen.innerHTML='';}//dont concat on numbers onto screen answer
         screen.innerHTML+= userInput;  //show numbers on screen
     if (element.target.className==='number'){
-        a+= userInput;
+        numBox+= userInput;
     }
     if (element.target.className==='operator'){    
-        calcArray.push(Number(a));//put number in array
+        if (numBox !== ''){
+        calcArray.push(Number(numBox));//put number in array
         console.log(calcArray);
-        a='';
-        if (b!== ''){
+        numBox='';
+        }if (opBox!== ''){
             operate();
             };
-        b= userInput;
-        console.log(b)
+        opBox= userInput;
+        console.log(opBox)
         }
     }
 } 
-let answer;
+let answer=0;
 const operate= function(){
     let x= calcArray[0];
     let y= calcArray[1];
-    if (b==='+'){answer = x+y}
-    if (b==='-'){answer= x-y}
-    if (b==='x'){answer= x*y}
-    if (b==='/'){answer= x/y}
-    console.log(answer)  
+    if (opBox==='+'){answer = x+y}
+    if (opBox==='-'){answer= x-y}
+    if (opBox==='x'){answer= x*y}
+    if (opBox==='/'){answer= x/y}
+    console.log(answer);
+    screen.innerHTML= answer; 
+    calcArray= [];
+    calcArray[0]= answer;
 };
+clearField= function(){
+    calcArray=[];
+    numBox='';
+    opBox='';
+    answer=0;
+    screen.innerHTML='';
+}
+let tempArray;
+deleteNum= function(){
+    tempArray=[];
+    tempArray= numBox.split('');
+    tempArray.pop();
+    numBox=tempArray.join('');
+    screen.innerHTML=numBox;
+}
 allButtons.addEventListener('click', test);
+bClear.addEventListener('click', clearField);
+bDelete.addEventListener('click', deleteNum);
