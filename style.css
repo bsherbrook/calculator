@@ -2,10 +2,12 @@ body{
     box-sizing: border-box;
     display: flex;
     justify-content: center;
+    margin-top: 100px;
+    background-color: aliceblue;
 }
 #calculator{
     box-sizing: border-box;
-    background-color: gray;
+    background-color: rgb(46, 69, 82);
     width: 450px;
     height: 650px;
     display: flex;
@@ -15,13 +17,18 @@ body{
 #screen{
     width: 350px;
     height: 100px;
-    background-color: antiquewhite;
+    background-color: rgb(244, 236, 225);
     box-sizing: border-box;
     margin-bottom: 50px;
+    font-size: 35px;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
 }
 #allButtons{
     height: 400px;
-    background-color: aliceblue;
+    background-color: rgb(175, 197, 216);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,10 +46,12 @@ button{
     margin: 10px;
     border-radius: 10px;
     height: 50px;
-    width: 60px;
+    width: 65px;
+    font-size: 20px;
+    background-color: rgb(220, 220, 207);
 }
 .big{
-    width: 100px;
+    width: 105px;
 }
 button:hover{
     cursor:pointer;
