@@ -15,17 +15,18 @@ const test= function(element){
        element.target.className==='number' ||
        element.target.className==='operator' ||
        element.target.className==='equals'){
-        let userInput= element.target.id;
+        let userInput= element.target.id;    // ignores all other parts of div container of buttons to recognize user click
     
     if (element.target.className==='number'){  
         if (screen.innerHTML===answer.toString() ||
             screenCheck===1){screen.innerHTML='';}//dont concat on numbers onto screen answer
         if (equals===true && opCheck===false){numBox='';opBox='';calcArray=[]; answer=0}    
         numBox+= userInput;
-        screen.innerHTML+= userInput;  //show numbers on screen
+        if (numBox.length<16){
+            screen.innerHTML+= userInput;}  //show numbers on screen
         screenCheck=0;
-        equals=false;
-        opCheck=false;
+        equals=false; // want numbers after hitting equals to start new input
+        opCheck=false;// want operator after hitting equals to continue operation
     }
     if (element.target.className==='operator' ||
         element.target.className==='equals'){ 
@@ -50,8 +51,10 @@ const operate= function(){
     if (opBox==='+'){answer = x+y}
     if (opBox==='-'){answer= x-y}
     if (opBox==='x'){answer= x*y}
-    if (opBox==='/'){answer= x/y}
-    screen.innerHTML= answer; 
+    if (opBox==='/'){if(y!==0){answer= x/y}}
+    answer= Math.round(answer*10000000000000)/10000000000000;
+    screen.innerHTML= answer;           // Keep numbers from overflowing onto page
+    if (answer.toString().length>16){screen.innerHTML= 'Error 80085'}
     calcArray= [];
     calcArray[0]= answer;
 };
@@ -78,3 +81,4 @@ allButtons.addEventListener('click', test);
 bClear.addEventListener('click', clearField);
 bDelete.addEventListener('click', deleteNum);
 bEquals.addEventListener('click', newNum)
+//bPosNeg.addEventListener('click', )
