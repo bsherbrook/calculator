@@ -77,8 +77,17 @@ let equals;
 let newNum = function(){
     equals=true
 };
+posOrNeg= function(){
+    if (numBox.charAt(0)==='-'){
+        numBox= numBox.slice(1);
+        screen.innerHTML= numBox;
+}   else {
+    numBox= '-'+ numBox;
+    screen.innerHTML= numBox;
+}
+}
 allButtons.addEventListener('click', test);
 bClear.addEventListener('click', clearField);
 bDelete.addEventListener('click', deleteNum);
 bEquals.addEventListener('click', newNum)
-//bPosNeg.addEventListener('click', )
+bPosNeg.addEventListener('click', posOrNeg)
